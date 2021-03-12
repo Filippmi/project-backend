@@ -6,14 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Project.create([
-  {name: "Basement remodel", description: "Adding home theater"},
-  {name: "Kitchen remodel", description: "Start date: 03/25/21 Finish by: 04/01/22"}
-])
+user_1 = User.create(name: "Filipp")
 
-Todo.create([
-  {task: "Calculate budget"},
-  {task: "Find designer"},
-  {task: "Find contractor"},
-  {task: "Figure out what the heck is going on lol"}
-])
+Project.create(name: "Final Project", description: "All of your work has come to this point. You got this", user: user_1)

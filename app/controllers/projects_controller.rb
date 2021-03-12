@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
 
-    render json: @projects
+    render json: @projects, except: [:created_at, :updated_at]
   end
 
   # GET /projects/1
@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      render json: @project, status: :created, location: @project
+      render json: @project, status: :created, location: @project, except: [:created_at, :updated_at]
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   def update
-    if @project.update(project_params)
+    if @project.update(project_params) 
       render json: @project
     else
       render json: @project.errors, status: :unprocessable_entity
@@ -36,6 +36,8 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   def destroy
     @project.destroy
+
+    render json: @project
   end
 
   private
