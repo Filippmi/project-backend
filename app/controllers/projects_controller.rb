@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
 
-    render json: @projects, except: [:created_at, :updated_at]
+    render json: @projects, except: [:created_at, :updated_at, :lead_id], include: [:lead]
   end
 
   # GET /projects/1
@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      render json: @project, status: :created, location: @project, except: [:created_at, :updated_at]
+      render json: @project, status: :created, location: @project, except: [:created_at, :updated_at, :lead_id], include: [:lead]
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   def update
     if @project.update(project_params) 
-      render json: @project
+      render json: @project, except: [:created_at, :updated_at, :lead_id], include: [:lead]
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -48,6 +48,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description)
+      params.require(:project).permit(:name, :description, :lead_attributes)
     end
 end

@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user_1 = User.create(name: "Filipp")
+lead_1 = Lead.create(name: "Filipp", email: "Filippmi@gmail.com")
 
-Project.create(name: "Final Project", description: "All of your work has come to this point. You got this", user: user_1)
+Project.create(name: "Final Project", description: "All of your work has come to this point. You got this", lead: lead_1)
